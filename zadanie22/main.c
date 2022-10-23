@@ -1,0 +1,1 @@
+// proszę wykonać sortowanie przez kopcowanie na tablicy o długości przynajmniej 1000 słów
