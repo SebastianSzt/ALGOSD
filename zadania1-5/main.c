@@ -9,7 +9,7 @@ int main(int argc, char** argv)
 
     while (select)
     {
-        printf("Menu naszego programu do list. Wybierz odpowiedniuą opcję.\n");
+        printf("Menu naszego programu do list. Wybierz odpowiednią opcję.\n");
         printf("1 - dodaj na początek listy\n");
         printf("2 - dodaj na koniec listy\n");
         printf("Wybierz opcję: ");
