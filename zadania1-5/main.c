@@ -10,14 +10,14 @@ int main(int argc, char** argv)
     while (select)
     {
         printf("Menu naszego programu do list. Wybierz odpowiednią opcję.\n");
-        printf("1 - dodaj na początek listy\n");
-        printf("2 - dodaj na koniec listy\n");
+        printf("1 - dodaj element na poczatku listy\n");
+        printf("2 - dodaj element na koncu listy\n");
         printf("Wybierz opcję: ");
         scanf("%d", &select);
         switch (select)
         {
             case 1:
-                //push();
+                push(&head, argc);
                 break;
             case 2:
                 //pushEnd();
