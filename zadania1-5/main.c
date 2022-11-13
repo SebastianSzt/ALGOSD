@@ -9,18 +9,30 @@ int main(int argc, char** argv)
 
     while (select)
     {
-        printf("Menu naszego programu do list. Wybierz odpowiednią opcję.\n");
+        printf("Menu programu do list. Wybierz odpowiednią opcję.\n");
+        printf("0 - Wyjscie z programu\n");
         printf("1 - dodaj element na poczatku listy\n");
         printf("2 - dodaj element na koncu listy\n");
         printf("Wybierz opcję: ");
         scanf("%d", &select);
         switch (select)
         {
+            case 0:
+                exit(0);
+                break;
             case 1:
-                push(&head, argc);
+                push(&head, 3);
+                push(&head, 2);
+                push(&head, 1);
+                push(&head->next, 0);
+                push(&head, 10);
+                WyswietlListe(head);
                 break;
             case 2:
-                //pushEnd();
+                pushEnd(&head, 1);
+                pushEnd(&head, 2);
+                pushEnd(&head, 3);
+                WyswietlListe(head);
                 break;
             default:
                 break;

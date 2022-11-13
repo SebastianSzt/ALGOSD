@@ -4,6 +4,7 @@ typedef struct listNode
   struct listNode *next;
 } node;
 
+void WyswietlListe (node *head);
 // ZADANIE 1
 void push(node **head, int val); // dodawanie na początek listy
 void pushEnd(node **head, int val); // dodawanie na koniec listy
