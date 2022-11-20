@@ -33,8 +33,6 @@ int main(int argc, char** argv)
                 pushEnd(&head, 1);
                 pushEnd(&head, 2);
                 pushEnd(&head, 3);
-                pushEnd(&head, 4);
-                pushEnd(&head, 5);
                 WyswietlListe(head);
                 break;
             default:
