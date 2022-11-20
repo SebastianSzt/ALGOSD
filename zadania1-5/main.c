@@ -13,6 +13,7 @@ int main(int argc, char** argv)
         printf("0 - Wyjscie z programu\n");
         printf("1 - dodaj element na poczatku listy\n");
         printf("2 - dodaj element na koncu listy\n");
+        printf("3 - usun pierwszy element listy\n");
         printf("Wybierz opcję: ");
         scanf("%d", &select);
         switch (select)
@@ -33,7 +34,6 @@ int main(int argc, char** argv)
                 pushEnd(&head, 2);
                 pushEnd(&head, 3);
                 pushEnd(&head, 4);
-                pushEnd(&head, 5);
                 WyswietlListe(head);
                 break;
             default:
