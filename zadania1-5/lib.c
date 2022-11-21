@@ -175,6 +175,24 @@ void removeAll_iteratively(node **head, int val)
     } 
 }
 
+void removeAll_recursively(node **head, int val)
+{
+    if (head != NULL)
+    {
+        node* current = find(*head, val);
+        if (current != NULL)
+        {
+            printf("Jest\n");
+            removeAll_recursively(&current, val);
+        }
+        if (current == NULL)
+        {
+            printf("Brak\n");
+        }
+        // removeNode(head, current);
+    }
+}
+
 node* revert_iteratively(node *head)
 {
     node *new = NULL;
@@ -192,8 +210,7 @@ node* revert_iteratively(node *head)
 
 void revert_recursively(node *head)
 {
-    node *p;
-    p=head;
+    node *p = head;
     if ((head != NULL) && (head->next != NULL))
     {
         head = head->next;

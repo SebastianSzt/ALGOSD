@@ -157,12 +157,12 @@ int main(int argc, char** argv)
             //Nie działa
             case 12:
             {
-                // head = readFromFile("plik.txt");
-                // printf("Lista przed:\n");
-                // WyswietlListe(head);
-                // removeAll_recursively(&head, 2);
-                // printf("Lista po:\n");
-                // WyswietlListe(head);
+                head = readFromFile("plik.txt");
+                printf("Lista przed:\n");
+                WyswietlListe(head);
+                removeAll_recursively(&head, 2);
+                printf("Lista po:\n");
+                WyswietlListe(head);
                 break;
             }
             //Nie działa
