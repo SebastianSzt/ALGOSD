@@ -182,14 +182,9 @@ void removeAll_recursively(node **head, int val)
         node* current = find(*head, val);
         if (current != NULL)
         {
-            printf("Jest\n");
-            removeAll_recursively(&current, val);
+            removeNode(head, current);
+            removeAll_recursively(head, val);
         }
-        if (current == NULL)
-        {
-            printf("Brak\n");
-        }
-        // removeNode(head, current);
     }
 }
 
