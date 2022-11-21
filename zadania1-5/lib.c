@@ -167,13 +167,12 @@ int saveToFile(node *head, char *fname)
 
 void removeAll_iteratively(node **head, int val)
 {
-    node* current;
-    do
+    node* current = find(*head, val);
+    while (current != NULL)
     {
-        current = find(*head, val);
         removeNode(head, current);
-    }
-    while(current != NULL);
+        current = find(*head, val);
+    } 
 }
 
 node* revert_iteratively(node *head)
