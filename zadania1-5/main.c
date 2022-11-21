@@ -154,6 +154,7 @@ int main(int argc, char** argv)
                 WyswietlListe(head);
                 break;
             }
+            //Nie działa
             case 12:
             {
                 // head = readFromFile("plik.txt");
@@ -164,6 +165,7 @@ int main(int argc, char** argv)
                 // WyswietlListe(head);
                 break;
             }
+            //Nie działa
             case 13:
             {
                 head = readFromFile("plik.txt");
@@ -175,6 +177,7 @@ int main(int argc, char** argv)
                 WyswietlListe(revert);
                 break;
             }
+            //Nie działa
             case 14:
             {
                 head = readFromFile("plik.txt");

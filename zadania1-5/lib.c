@@ -192,7 +192,8 @@ node* revert_iteratively(node *head)
 
 void revert_recursively(node *head)
 {
-    node *p = head;
+    node *p;
+    p=head;
     if ((head != NULL) && (head->next != NULL))
     {
         head = head->next;
