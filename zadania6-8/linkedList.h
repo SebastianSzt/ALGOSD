@@ -6,7 +6,9 @@ typedef struct listNode
 
 typedef linkedListNode* node; // tym razem ukrywamy jeden wskaźnik w definicji linkedListNode;
 
-void addElement(node* head, int value); // dodaj element w kolejności
+void pushEnd(node *head, int val);
+void popEnd(node *head);
+void addElement(node* head, int value, int sentinel); // dodaj element w kolejności
 int pop(node* head); // usuwanie pierwszego elementu listy i zwracanie jego wartości
 int popBack(node* head); // usuwanie ostatniego elementu listy i zwracanie jego wartości
 node find(node head, int value); // znajdowanie elementu o wskazanej wartości
