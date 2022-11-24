@@ -9,8 +9,8 @@ statusy: nierozpoczęte/rozpoczęte/wymaga drobnych poprawek/gotowe do oceny
 
 Po sprawdzeniu zadanie otrzyma status sprawdzone - będzie to oznaczać, że w najbliższym czasie trzeba będzie odpowiedzieć na pytania dotyczące zadania.
 
-1. Zadanie 1 - rozpoczęte
-2. Zadanie 2 - nierozpoczęte
+1. Zadanie 1 - gotowe do oceny
+2. Zadanie 2 - gotowe do oceny
 3. Zadanie 3 - nierozpoczęte
 4. Zadanie 4 - nierozpoczęte
 5. Zadanie 5 - nierozpoczęte
