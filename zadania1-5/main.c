@@ -6,10 +6,8 @@ int main(int argc, char** argv)
 {
     node* head = NULL;
     int select = 1;
-
     while (select)
     {
-        //1,2,5,6
         printf("Menu programu do list. Wybierz odpowiednią opcję.\n");
         printf("0 - Wyjscie z programu\n");
         printf("1 - dodawanie na początek listy\n");
@@ -188,6 +186,5 @@ int main(int argc, char** argv)
                 printf("Niepoprawna cyfra.\n");
                 break;
         }
-        exit(0);
     }
 }
