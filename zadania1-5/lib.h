@@ -29,5 +29,5 @@ void usunniepodz(node **l, int k); // usuń z listy l wszystkie liczby niepodzie
 
 // ZADANIE 5 
 // W tym zadaniu można wybrać typ zwracanego parametru i argumentu funkcji, w zależności od wybranego podejścia do problemu - proszę zastąpić typ void odpowiednim typem
-node* revert_iteratively(node *head); // odwróć listę iteracyjnie
-void revert_recursively(node *head); // odwróć listę rekurencyjnie
+void revert_iteratively(node **head); // odwróć listę iteracyjnie
+void revert_recursively(node **head); // odwróć listę rekurencyjnie

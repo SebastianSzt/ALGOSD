@@ -125,6 +125,7 @@ void removeNode(node **head, node *current)
     }
 }
 
+//Plik musi się znajdować w katalogu nadrzędnym
 node* readFromFile(char *fname)
 {
     FILE *file = fopen(fname, "r");
@@ -188,27 +189,26 @@ void removeAll_recursively(node **head, int val)
     }
 }
 
-node* revert_iteratively(node *head)
+void revert_iteratively(node **head)
 {
-    node *new = NULL;
     node *tmp;
-    while (head != NULL)
-    {
-        tmp = head->next;
-        head->next = new;
-        new = head;
-        head = tmp;
+    node *new = NULL;
+    while( *head != NULL )
+    {   
+        tmp = (*head)->next;
+        (*head)->next = new;
+        new = *head;
+        *head = tmp;
     }
-    head = new;
-    return head;
+    *head = new;
 }
 
-void revert_recursively(node *head)
+void revert_recursively(node **head)
 {
-    node *p = head;
-    if ((head != NULL) && (head->next != NULL))
+    node *p = *head;
+    if ( ( *head != NULL ) && ( (*head)->next != NULL ) )
     {
-        head = head->next;
+        *head = (*head)->next;
         revert_recursively(head);
         p->next->next = p;
         p->next = NULL;

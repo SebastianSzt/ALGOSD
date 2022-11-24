@@ -154,7 +154,6 @@ int main(int argc, char** argv)
                 WyswietlListe(head);
                 break;
             }
-            //Nie działa
             case 12:
             {
                 head = readFromFile("plik.txt");
@@ -165,25 +164,22 @@ int main(int argc, char** argv)
                 WyswietlListe(head);
                 break;
             }
-            //Nie działa
             case 13:
             {
                 head = readFromFile("plik.txt");
                 printf("Lista przed:\n");
                 WyswietlListe(head);
-                node* revert;
-                revert = revert_iteratively(head);
+                revert_iteratively(&head);
                 printf("Lista po:\n");
-                WyswietlListe(revert);
+                WyswietlListe(head);
                 break;
             }
-            //Nie działa
             case 14:
             {
                 head = readFromFile("plik.txt");
                 printf("Lista przed:\n");
                 WyswietlListe(head);
-                revert_recursively(head);
+                revert_recursively(&head);
                 printf("Lista po:\n");
                 WyswietlListe(head);
                 break;
