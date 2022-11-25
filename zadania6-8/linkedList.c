@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "linkedList.h"
 
-void pushEnd(node *head, int val)
+void pushEnd(node *head, int val) //funkcja dla wartownika
 {
     node p = (node)malloc(sizeof(linkedListNode));
     p->data = val;
@@ -14,7 +14,7 @@ void pushEnd(node *head, int val)
     *head = p;
 }
 
-void popEnd(node *head)
+void popEnd(node *head) //funkcja dla wartownika
 {
     if(*head)
     {
@@ -24,56 +24,188 @@ void popEnd(node *head)
         }
         free(*head);
         *head = NULL;
-        // if ( (*head)->next != NULL )
-        // {
-        //     while((*head)->next->next)
-        //     {
-        //         *head = (*head)->next;
-        //     }
-        //     free((*head)->next);
-        //     (*head)->next = NULL;
-        // }
-        // else
-        // {
-        //     free(head);
-        //     *head = NULL;
-        // }
     }
 }
 
 void addElement(node* head, int value, int sentinel)
 {
-    node p = *head;
     if (sentinel == 1)
     {
         pushEnd(head, 9999);
-        while(p->data != 9999)
+        node p = (node)malloc(sizeof(linkedListNode));
+        p->data = value;
+        while((*head)->data != 9999)
         {
-            if (value <= p->data)
+            if (value <= (*head)->data)
             {
-                node tmp = (node)malloc(sizeof(linkedListNode));
-                tmp = p;
-                printList(tmp);
-                printList(p);
-                p->data = value;
-                printList(tmp);
-                printList(p);
-                p->next = tmp;
+                p->next = *head;
+                *head = p;
                 popEnd(head);
                 return;
             }
             else
             {
-                p = p->next;
+                head = &(*head)->next;
             }
         }
-        // p->next = p;
-        // p = p;
-        // popEnd(head);
+        p->next = *head;
+        *head = p;
+        popEnd(head);
     }
     else
     {
-        exit(0);
+        node p = (node)malloc(sizeof(linkedListNode));
+        p->data = value;
+        while(*head)
+        {
+            if (value <= (*head)->data)
+            {
+                p->next = *head;
+                *head = p;
+                return;
+            }
+            else
+            {
+                head = &(*head)->next;
+            }
+        }
+        p->next = *head;
+        *head = p;
+    }
+}
+
+int pop(node* head, int sentinel)
+{
+    node p = *head;
+    if (sentinel == 1)
+    {
+        pushEnd(head, 9999);
+        if((*head)->data != 9999)
+        {
+            int x = (*head)->data;
+            *head = p->next;
+            free(p);
+            popEnd(head);
+            return x;
+        }
+        else
+        {
+            int x = (*head)->data;
+            free(*head);
+            *head = NULL;
+            return x;
+        }
+    }
+    else
+    {
+        if(*head)
+        {
+            int x = (*head)->data;
+            *head = p->next;
+            free(p);
+            return x;
+        }
+        else return 9999;
+    }
+}
+
+int popBack(node* head, int sentinel)
+{
+    if (sentinel == 1)
+    {
+        if (*head)
+        {
+            pushEnd(head, 9999);
+            while((*head)->next->data != 9999)
+            {
+                head = &(*head)->next;
+            }
+            int x = (*head)->data;
+            free(*head);
+            *head = NULL;
+            return x;
+        }
+        else return 9999;
+    }
+    else
+    {
+        if (*head)
+        {
+            while((*head)->next)
+            {
+                head = &(*head)->next;
+            }
+            int x = (*head)->data;
+            free(*head);
+            *head = NULL;
+            return x;
+        }
+        else return 9999;
+    }
+}
+
+node find(node head, int value, int sentinel)
+{
+    if (sentinel == 1)
+    {
+        pushEnd(&head, 9999);
+        while ((head->data != 9999) && (head->data != value))
+        {
+            head = head->next;
+        }
+        popEnd(&head);
+        return head;
+    }
+    else
+    {
+        while ((head != NULL) && (head->data != value))
+        {
+            head = head->next;
+        }
+        return head;
+    }
+}
+
+void removeElement(node* head, node element, int sentinel)
+{
+    if (sentinel == 1)
+    {
+        if (*head == element)
+        {
+            pop(head, sentinel);
+        }
+        else
+        {
+            pushEnd(head, 9999);
+            node p = *head;
+            while(p->next != element) 
+            {
+                p = p->next;
+            }
+            free(p->next);
+            p->next = NULL;
+            p->next = element->next;
+            popEnd(head);
+        }
+    }
+    else
+    {
+        node p = *head;
+        if (*head == element)
+        {
+            *head = p->next;
+            free(p);
+        }
+        else
+        {
+            while(p->next != element) 
+            {
+                p = p->next;
+            }
+            free(p->next);
+            p->next = NULL;
+            p->next = element->next;
+        }
     }
 }
 
@@ -93,7 +225,7 @@ node readFromFile(char *fname)
     node head = NULL;
     if (file == NULL)
     {
-        printf("Error.\n");
+        printf("Odczyt pliku nie powiódł się.\n");
     }
     else
     {
