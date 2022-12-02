@@ -21,6 +21,7 @@ void removeNode(node* head, node current); // usuń wskazany element
 node readFromFile(char *fname); // wczytaj zawartość listy z pliku
 int saveToFile(node head, char *fname); // zapisz zawartość listy do pliku
 void printList(node head); // wyświetl zawartość listy
+void printList_reverse(node head); //wyświetl zawartość listy odwrotnie(funkcja testowa, później usunę)
 
 // lista dwukierunkowa posortowana
 void addElementInOrder(node* head, int value); // dodaj element w kolejności
