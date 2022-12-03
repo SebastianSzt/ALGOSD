@@ -159,7 +159,77 @@ int main()
     }
     else if (select == 2)
     {
-        
+        printf("Menu programu do list. Wybierz odpowiednią opcję.\n");
+        printf("0 - Wyjscie z programu\n");
+        printf("1 - dodaj element w kolejności\n");
+        printf("2 - znajdowanie elementu o wskazanej wartości\n");
+        printf("3 - usuwanie elementu wcześniej znalezionego\n");
+        printf("4 - wczytanie listy do pliku (w porządku, ale w pliku nie musi być zachowany porządek)\n");
+        printf("Wybierz opcję: ");
+        scanf("%d", &select);
+
+        int sentinel = 2;
+        if (select > 0 && select < 5)
+        {
+            while(sentinel != 0 && sentinel != 1)
+            {
+                printf("Czy lista jest z wartownikiem?\n");
+                printf("0 - Nie\n");
+                printf("1 - Tak\n");
+                printf("Wybierz opcję: ");
+                scanf("%d", &sentinel);
+            }
+        }
+
+        switch (select)
+        {
+            case 0:
+                return 0;
+                break;
+            case 1:
+                head = readFromFileInOrder("plik.txt", sentinel);
+                printf("Lista przed:\n");
+                printList(head);
+                addElementInOrder(&head, 4, sentinel);
+                printf("Lista po:\n");
+                printList(head);
+                break;
+            case 2:
+                head = readFromFileInOrder("plik.txt", sentinel);
+                printf("Przeszukiwana lista:\n");
+                printList(head);
+                node element_findInOrder = findInOrder(head, 5, sentinel);
+                if (!element_findInOrder) printf("Nie znaleziono elementu w liście.\n");
+                else 
+                {
+                    printf("Lista znalezionego elementu:\n");
+                    printList(element_findInOrder);
+                }
+                break;
+            case 3:
+                head = readFromFileInOrder("plik.txt", sentinel);
+                printf("Lista:\n");
+                printList(head);
+                node element_removeElementInOrder = findInOrder(head, 5, sentinel);
+                if (!element_removeElementInOrder) printf("Nie znaleziono wskazywanego elementu w liście.\n");
+                else 
+                {
+                    printf("Lista wskazanego elementu:\n");
+                    printList(element_removeElementInOrder);
+                    removeElementInOrder(&head, element_removeElementInOrder, sentinel);
+                    printf("Lista po usunięciu wskazanego elementu:\n");
+                    printList(head);
+                }
+                break;
+            case 4:
+                head = readFromFileInOrder("plik.txt", sentinel);
+                printf("Lista:\n");
+                printList(head);
+                break;
+            default:
+                printf("Niepoprawna cyfra.\n");
+                break;
+        }
     }
     else
     {
