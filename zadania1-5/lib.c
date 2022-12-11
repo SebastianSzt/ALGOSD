@@ -36,10 +36,15 @@ void pushEnd(node **head, int val)
 void pop(node **head)
 {
     node *l = *head;
-    if(l)
+    if(l->next != 0)
     {
         *head = l->next;
         free(l);
+    }
+    else
+    {
+        free(l);
+        *head = NULL;
     }
 }
 
@@ -172,19 +177,31 @@ void removeAll_iteratively(node **head, int val)
     while (current != NULL)
     {
         removeNode(head, current);
-        current = find(*head, val);
+        current = find(current, val);
     } 
 }
 
 void removeAll_recursively(node **head, int val)
 {
+    // if (head != NULL)
+    // {
+    //     node* current = find(*head, val);
+    //     if (current != NULL)
+    //     {
+    //         removeNode(head, current);
+    //         removeAll_recursively(head, val);
+    //     }
+    // }
     if (head != NULL)
     {
-        node* current = find(*head, val);
-        if (current != NULL)
+        if ((*head)->data == val)
         {
-            removeNode(head, current);
-            removeAll_recursively(head, val);
+            pop(head);
+            if ((*head)) removeAll_recursively(head, val);
+        }
+        else if ((*head)->next)
+        {
+            removeAll_recursively(&(*head)->next, val);
         }
     }
 }
