@@ -202,7 +202,7 @@ void printList(node head)
     printf ("\n");
 }
 
-void printList_reverse(node head)
+void printListReverse(node head)
 {
     while (head->next)
     {
@@ -289,7 +289,7 @@ node findInOrder(node head, int value, int sentinel)
             head = head->next;
         }
     }
-    head->prev = 0;
+    if (head) head->prev = 0;
     return head;
 }
 
