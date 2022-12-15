@@ -17,6 +17,7 @@ void pushAfter(node current, int val); // dodaj za wskazanym elementem
 void removeNode(node* head, node current); // usuń wskazany element
 node readFromFile(char* fname); // wczytaj zawartość listy z pliku
 int saveToFile(node head, char* fname); // zapisz zawartość listy do pliku
+void printList(node head); // wyświetl zawartość listy
 
 // ZADANIE 11
 void removeEveryK(node* head, int k); // usuń co k-ty element aż na liście pozostanie tylko jeden element
