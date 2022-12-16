@@ -105,9 +105,13 @@ void removeNode(node* head, node current)
         {
             p = p->next;
         }
-        if (p == current && p->next == *head)
+        if (p == current && p->next == *head && p != *head)
         {
             popEnd(&p->next);
+        }
+        else if (p == current && p->next == *head && p == *head)
+        {
+            *head = NULL;
         }
         else if (p == current && p->next != *head)
         {
