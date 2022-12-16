@@ -117,7 +117,7 @@ int main()
             head = readFromFile("plik.txt");
             printf("Lista:\n");
             printList(head);
-            node element_removeNode = find(head, 2);
+            node element_removeNode = find(head, 5);
             if (!element_removeNode) printf("Nie znaleziono wskazywanego elementu w liście.\n");
             else 
             {
