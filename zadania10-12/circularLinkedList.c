@@ -171,6 +171,14 @@ void printList(node head)
             if (p->next == head) break;
             p = p->next;
         }
+        // p = p->next;
+        // printf("\t");
+        // while (p)
+        // {
+        //     printf("%d->", p->data);
+        //     if (p->next == head) break;
+        //     p = p->next;
+        // }
     }
     printf("\n");
 }

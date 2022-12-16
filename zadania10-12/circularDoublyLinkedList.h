@@ -18,3 +18,5 @@ void pushAfter(node current, int val); // dodaj za wskazanym elementem
 void removeNode(node* head, node current); // usuń wskazany element
 node readFromFile(char* fname); // wczytaj zawartość listy z pliku
 int saveToFile(node head, char* fname); // zapisz zawartość listy do pliku
+void printList(node head); // wyświetl zawartość listy
+void printListReverse(node head); //wyświetl zawartość listy od tyłu
