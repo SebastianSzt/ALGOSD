@@ -17,8 +17,8 @@ Po sprawdzeniu zadanie otrzyma status sprawdzone - będzie to oznaczać, że w n
 6. Zadanie 6 - gotowe do oceny
 7. Zadanie 7 - nierozpoczęte
 8. Zadanie 8 - nierozpoczęte
-9. Zadanie 9 - rozpoczęte
-10. Zadanie 10 - nierozpoczęte
+9. Zadanie 9 - gotowe do oceny
+10. Zadanie 10 - rozpoczęte
 11. Zadanie 11 - nierozpoczęte
 12. Zadanie 12 - nierozpoczęte
 13. Zadanie 13 - nierozpoczęte
