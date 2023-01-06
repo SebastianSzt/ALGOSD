@@ -182,3 +182,35 @@ void printList(node head)
     }
     printf("\n");
 }
+
+void diffList(node* a, node b)
+{
+    if (b)
+    {
+        node p = b;
+        node tmp;
+        while (p)
+        {
+            tmp = find(*a, p->data);
+            while(tmp)
+            {
+                if (tmp->next == *a && tmp != *a)
+                {
+                    popEnd(&tmp->next);
+                }
+                else if (tmp->next == *a && tmp == *a)
+                {
+                    *a = NULL;
+                }
+                else if (tmp->next != *a)
+                {
+                    pop(&tmp);
+                }
+                tmp = find(*a, p->data);
+            }
+            if (p->next == b) break;
+            p = p->next;
+        }
+    }
+    else printf("Lista b jest pusta\n");
+}

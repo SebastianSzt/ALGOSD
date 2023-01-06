@@ -19,6 +19,7 @@ int main()
     printf("9 - wczytaj zawartość listy z pliku\n");
     printf("10 - zapisz zawartość listy do pliku\n");
     printf("11 - wyświetl zawartość listy\n");
+    printf("12 - usuń z listy a wszystkie wystąpienia elementów z listy b\n");
     printf("Wybierz opcję: ");
     int select;
     scanf("%d", &select);
@@ -137,6 +138,23 @@ int main()
         case 11:
             head = readFromFile("plik.txt");
             printf("Lista:\n");
+            printList(head);
+            break;
+        case 12:
+            head = readFromFile("plik.txt");
+            printf("Lista a:\n");
+            printList(head);
+            node head_b = NULL;
+            push(&head_b, 3);
+            push(&head_b, 2);
+            push(&head_b, 2);
+            push(&head_b, 1);
+            push(&head_b, 4);
+            push(&head_b, 9);
+            printf("Lista b:\n");
+            printList(head_b);
+            diffList(&head, head_b);
+            printf("Lista a po usunieciu wszystkich wystąpien elementow z listy b:\n");
             printList(head);
             break;
         default:
