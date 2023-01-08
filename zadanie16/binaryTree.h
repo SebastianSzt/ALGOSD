@@ -8,3 +8,4 @@ typedef treeNode* node;
 
 void insert(node* root, int val);
 int containSameValues(node* tree1, node* tree2);
+void printTree(node root);
