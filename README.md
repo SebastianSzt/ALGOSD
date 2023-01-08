@@ -22,7 +22,7 @@ Po sprawdzeniu zadanie otrzyma status sprawdzone - będzie to oznaczać, że w n
 11. Zadanie 11 - nierozpoczęte
 12. Zadanie 12 - gotowe do oceny
 13. Zadanie 13 - nierozpoczęte
-14. Zadanie 14 - rozpoczęte
+14. Zadanie 14 - gotowe do oceny
 15. Zadanie 15 - nierozpoczęte
 16. Zadanie 16 - nierozpoczęte
 17. Zadanie 17 - nierozpoczęte
