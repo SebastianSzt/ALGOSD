@@ -6,7 +6,7 @@ int main()
 {
     node head = NULL;
 
-    printf("Menu programu dla listy jednokierunkowej cyklicznej. Wybierz odpowiednią opcję.\n");
+    printf("Menu programu dla listy dwukierunkowej cyklicznej. Wybierz odpowiednią opcję.\n");
     printf("0 - Wyjscie z programu\n");
     printf("1 - dodawanie na początek listy\n");
     printf("2 - dodawanie na koniec listy\n");
