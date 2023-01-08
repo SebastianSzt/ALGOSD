@@ -13,6 +13,7 @@ void insert(node* root, char* value)
         d->word = value;
         d->left = NULL;
         d->right = NULL;
+        d->parent = NULL;
         *root = d;
     }
     else
@@ -21,53 +22,151 @@ void insert(node* root, char* value)
         if (tmp < 0)
         {
             insert(&(*root)->right, value);
+            (*root)->right->parent = (*root);
         }
         else if (tmp >= 0)
         {
             insert(&(*root)->left, value);
+            (*root)->left->parent = (*root);
         }
     }
 }
 
 void removeNode(node* root, char* value)
 {
-    // if (*root == NULL)
-    // {
-    //     return;
-    // } 
-    // if (strcmp((*root)->word, value) >= 0)
-    // {
-    //     removeNode(&(*root)->left, value);
-    // }   
-    // else if (strcmp((*root)->word, value) < 0)
-    // {
-    //     removeNode(&(*root)->right, value);
-    // }
-    // else 
-    // {
-    //     if (&(*root)->left == NULL) 
-    //     {
-    //         node temp = (*root)->right;
-    //         free(root);
-    //         *root = temp;
-    //     }
-    //     else if (&(*root)->right == NULL) 
-    //     {
-    //         node temp = (*root)->left;
-    //         free(root);
-    //         *root = temp;
-    //     }
-    //     else
-    //     {
-    //         node temp = *root;
- 
-    //         while (temp && temp->left != NULL)  temp = temp->left;
- 
-    //         (*root)->word = temp->word;
+    node tmp=*root;
+	if (!*root)
+	{
+        return;
+    }
+	while (tmp != NULL && tmp->word != value)
+	{
+		if (strcmp(tmp->word, value) < 0)
+		{
+			tmp = tmp->right;
+		}
+		else
+        {
+            tmp = tmp->left;
+        }
+	}
+	if (!tmp)
+    {
+        printf("Nie znaleziono takiego wyrazu, nic nie usunieto.\n");
+        return;
+    }
     
-    //         removeNode(&(*root)->right, temp->word);
-    //     }
-    // }
+    if (!tmp->left && !tmp->right)
+    {
+        if (tmp->parent->left == tmp) tmp->parent->left = NULL;
+        else tmp->parent->right = NULL;
+        free(tmp);
+    }
+    else if (tmp->left && !tmp->right)
+    {
+        if (tmp->parent->left == tmp)
+        {
+            tmp->parent->left = tmp->left;
+            tmp->parent->left->parent = tmp->parent;
+        }
+        else
+        {
+            tmp->parent->right = tmp->left;
+            tmp->parent->right->parent = tmp->parent;
+        }
+        free(tmp);
+    }
+    else if (!tmp->left && tmp->right)
+    {
+        if (tmp->parent->left == tmp)
+        {
+            tmp->parent->left = tmp->right;
+            tmp->parent->left->parent = tmp->parent;
+        }
+        else
+        {
+            tmp->parent->right = tmp->right;
+            tmp->parent->right->parent = tmp->parent;
+        }
+        free(tmp);
+    }
+    else
+    {
+        node tmp2 = tmp->left;
+        if (tmp == *root)
+        {
+            *root = tmp->right;
+            (*root)->parent = NULL;
+            if (!(*root)->left) (*root)->left = tmp2;
+            else
+            {
+                node current = *root;
+                while (current->left)
+                {
+                    current = current->left;
+                }
+                tmp2->parent = current;
+                current->left = tmp2;
+            }
+            free(tmp);
+        }
+        else
+        {
+            if (tmp->parent->left == tmp)
+            {
+                tmp->parent->left = tmp->right;
+                tmp->parent->left->parent = tmp->parent;
+
+                node current = tmp->parent->left;
+                while (current->left)
+                {
+                    current = current->left;
+                }
+                tmp2->parent = current;
+                current->left = tmp2;
+            }
+            else
+            {
+                tmp->parent->right = tmp->right;
+                tmp->parent->right->parent = tmp->parent;
+
+                node current = tmp->parent->right;
+                while (current->left)
+                {
+                    current = current->left;
+                }
+                tmp2->parent = current;
+                current->left = tmp2;
+            }
+            free(tmp);
+        }
+    }
+}
+
+node find(node* root,char* value)
+{
+	if (!*root)
+	{
+        printf("Drzewo jest puste.\n");
+        return 0;
+    }
+	while (*root != NULL && (*root)->word != value)
+	{
+		if (strcmp((*root)->word, value) < 0)
+		{
+			*root = (*root)->right;
+		}
+		else
+        {
+            *root = (*root)->left;
+        }
+	}
+	if (!*root)
+    {
+        printf("Nie znaleziono takiego wyrazu.\n");
+        return 0;
+    }
+    return *root;
 }
 
 char* treeMax(node root)

@@ -10,11 +10,12 @@ int main()
     printf("0 - Wyjscie z programu\n");
     printf("1 - dodawanie\n");
     printf("2 - usuwanie\n");
-    printf("3 - wyznaczanie maksimum\n");
-    printf("4 - wyznaczanie minimum\n");
-    printf("5 - wyznaczanie poprzednika\n");
-    printf("6 - wyznaczanie nastepnika\n");
-    printf("7 - drukowanie zawartosci utworzonego drzewa\n");
+    printf("3 - szukanie\n");
+    printf("4 - wyznaczanie maksimum\n");
+    printf("5 - wyznaczanie minimum\n");
+    printf("6 - wyznaczanie poprzednika\n");
+    printf("7 - wyznaczanie nastepnika\n");
+    printf("8 - drukowanie zawartosci utworzonego drzewa\n");
     printf("Wybierz opcję: ");
     int select;
     scanf("%d", &select);
@@ -49,8 +50,8 @@ int main()
             insert(&root, "6");
             printf("Drzewo:\n");
             printTree(root);
-            removeNode(&root, "8");
-            printf("Drzewo:\n");
+            removeNode(&root, "5");
+            printf("\n\n\n Nowe drzewo:\n");
             printTree(root);
             break;
         case 3:
@@ -65,10 +66,26 @@ int main()
             insert(&root, "6");
             printf("Drzewo:\n");
             printTree(root);
+            node new = find(&root, "3");
+            printf("\n\n\n Drzewo znalezionego wyrazu:\n");
+            printTree(new);
+            break;
+        case 4:
+            insert(&root, "5");
+            insert(&root, "3");
+            insert(&root, "7");
+            insert(&root, "1");
+            insert(&root, "2");
+            insert(&root, "4");
+            insert(&root, "8");
+            insert(&root, "9");
+            insert(&root, "6");
+            printf("Drzewo:\n");
+            printTree(root);
             char* max = treeMax(root);
             printf("Maksimum: %s\n", max);
             break;
-        case 4:
+        case 5:
             insert(&root, "5");
             insert(&root, "3");
             insert(&root, "7");
@@ -83,7 +100,7 @@ int main()
             char* min = treeMin(root);
             printf("Minimum: %s\n", min);
             break;
-        case 5:
+        case 6:
             insert(&root, "5");
             insert(&root, "3");
             insert(&root, "7");
@@ -98,7 +115,7 @@ int main()
             char* a = ancestor(root);
             printf("Poprzednik: %s\n", a);
             break;
-        case 6:
+        case 7:
             insert(&root, "5");
             insert(&root, "3");
             insert(&root, "7");
@@ -113,7 +130,7 @@ int main()
             char* d = descendant(root);
             printf("Nastepnik: %s\n", d);
             break;
-        case 7:
+        case 8:
             insert(&root, "5");
             insert(&root, "3");
             insert(&root, "7");
