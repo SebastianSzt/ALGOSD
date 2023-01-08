@@ -6,7 +6,7 @@ int main()
 {
     node root = NULL;
 
-    printf("Menu programu dla drzewa binarnego lancuchów znakowych. Wybierz odpowiednia opcje.\n");
+    printf("Menu programu dla drzewa binarnego. Wybierz odpowiednia opcje.\n");
     printf("0 - Wyjscie z programu\n");
     printf("1 - dodawanie\n");
     printf("2 - usuwanie\n");

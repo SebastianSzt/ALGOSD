@@ -35,7 +35,6 @@ void removeNode(node* root, char* value)
     // {
     //     return;
     // } 
- 
     // if (strcmp((*root)->word, value) >= 0)
     // {
     //     removeNode(&(*root)->left, value);
