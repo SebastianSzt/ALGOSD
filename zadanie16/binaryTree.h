@@ -2,6 +2,7 @@ typedef struct tree {
     int value;
     struct tree *left;
     struct tree *right;
+    struct tree *parent;
 } treeNode;
 
 typedef treeNode* node;

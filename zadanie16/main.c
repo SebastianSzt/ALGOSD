@@ -34,12 +34,12 @@ int main()
             insert(&root2, 5);
             insert(&root2, 3);
             insert(&root2, 7);
+            insert(&root2, 6);
             insert(&root2, 1);
             insert(&root2, 2);
             insert(&root2, 4);
             insert(&root2, 8);
             insert(&root2, 9);
-            insert(&root2, 6);
             printf("Drugie drzewo:\n");
             printTree(root2);
             if (containSameValues(&root1, &root2)) printf("\n\nDrzewa sa takie same.\n");
