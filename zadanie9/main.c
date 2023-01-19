@@ -100,7 +100,7 @@ int main()
                     printf("Lista wskazanego elementu:\n");
                     printList(element_pushBefore);
                     pushBefore(&head, element_pushBefore, 4);
-                    printf("Lista po dodaniu elementu o watości 4 przed wskazanym elementem:\n");
+                    printf("Lista po dodaniu elementu o wartości 4 przed wskazanym elementem:\n");
                     printList(head);
                 }
                 break;
@@ -115,7 +115,7 @@ int main()
                     printf("Lista wskazanego elementu:\n");
                     printList(element_pushAfter);
                     pushAfter(&head, element_pushAfter, 4);
-                    printf("Lista po dodaniu elementu o watości 4 po wskazanym elementem:\n");
+                    printf("Lista po dodaniu elementu o wartości 4 po wskazanym elementem:\n");
                     printList(head);
                 }
                 break;
@@ -179,6 +179,13 @@ int main()
                 printf("Wybierz opcję: ");
                 scanf("%d", &sentinel);
             }
+            /*if (sentinel == 1) //Odkomentować jeśli lista nie jest wczytywana z pliku
+            {
+                head = (node)malloc(sizeof(doublyLinkedListNode));
+                head->data = 9999;
+                (*head).next = 0;
+                (*head).prev = 0;
+            }*/
         }
 
         switch (select)
@@ -199,7 +206,7 @@ int main()
                 printf("Przeszukiwana lista:\n");
                 printList(head);
                 node element_findInOrder = findInOrder(head, 5, sentinel);
-                if (!element_findInOrder) printf("Nie znaleziono elementu w liście.\n");
+                if (!element_findInOrder || element_findInOrder->data == 9999) printf("Nie znaleziono elementu w liście.\n");
                 else 
                 {
                     printf("Lista znalezionego elementu:\n");
@@ -211,7 +218,7 @@ int main()
                 printf("Lista:\n");
                 printList(head);
                 node element_removeElementInOrder = findInOrder(head, 5, sentinel);
-                if (!element_removeElementInOrder) printf("Nie znaleziono wskazywanego elementu w liście.\n");
+                if (!element_removeElementInOrder || element_removeElementInOrder->data == 9999) printf("Nie znaleziono wskazywanego elementu w liście.\n");
                 else 
                 {
                     printf("Lista wskazanego elementu:\n");
@@ -229,6 +236,16 @@ int main()
             default:
                 printf("Niepoprawna cyfra.\n");
                 break;
+        }
+        if (sentinel == 1)
+        {
+            while((*head).next)
+            {
+                head = (*head).next;
+            }
+            (*head).prev->next = 0;
+            free(head);
+            head = NULL;
         }
     }
     else

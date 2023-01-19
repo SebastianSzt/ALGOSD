@@ -79,18 +79,16 @@ void pushBefore(node* head, node current, int val)
 {
     if (current != 0)
     {
-        if (*head == current)
+        if (current->prev)
         {
-            push(head, val);
+            node tmp = current->prev;
+            push(&current, val);
+            tmp->next = current;
+            current->prev = tmp;
         }
         else
         {
-            while((*head)->next != current) 
-            {
-                head = &(*head)->next;
-            }
-            push(&(*head)->next, val);
-            (*head)->next->prev = *head;
+            push(&(*head), val);
         }
     }
 }
@@ -99,27 +97,14 @@ void pushAfter(node* head, node current, int val)
 {
     if (current != 0)
     {
-        if (*head == current)
+        if (current->next)
         {
-            if ((*head)->next)
-            {
-                push(&(*head)->next, val);
-                (*head)->next->prev = *head;
-            }
-            else pushEnd(head, val);
+            push(&current->next, val);
+            current->next->prev = current;
         }
         else
         {
-            while((*head) != current) 
-            {
-                head = &(*head)->next;
-            }
-            if ((*head)->next)
-            {
-                push(&(*head)->next, val);
-                (*head)->next->prev = *head;
-            }
-            else pushEnd(head, val);
+            pushEnd(&(*head), val);
         }
     }
 }
@@ -128,23 +113,22 @@ void removeNode(node* head, node current)
 {
     if (current != 0)
     {
-        node p = *head;
-        if (*head == current)
+        if (current->prev)
         {
-            *head = p->next;
-            free(p);
-            (*head)->prev = 0;
+            if (current->next)
+            {
+                current->next->prev = current->prev;
+                current->prev->next = current->next;
+            }
+            else
+            {
+                current->prev->next = 0;
+            }
         }
         else
         {
-            while(p->next != current) 
-            {
-                p = p->next;
-            }
-            free(p->next);
-            p->next = NULL;
-            p->next = current->next;
-            p->next->prev = p;
+            *head = (*head)->next;
+            (*head)->prev = 0;
         }
     }
 }
@@ -194,7 +178,7 @@ int saveToFile(node head, char *fname)
 
 void printList(node head)
 {
-    while (head)
+    while (head && head->data != 9999)
     {
         printf ("%d->", head->data);
         head = head->next;
@@ -204,7 +188,7 @@ void printList(node head)
 
 void printListReverse(node head)
 {
-    while (head->next)
+    while (head->next && head->next->data != 9999)
     {
         head = head->next;
     }
@@ -220,7 +204,6 @@ void addElementInOrder(node* head, int value, int sentinel)
 {
     if (sentinel == 1)
     {
-        pushEnd(head, 9999);
         node p = (node)malloc(sizeof(doublyLinkedListNode));
         p->data = value;
         while((*head)->data != 9999)
@@ -231,7 +214,6 @@ void addElementInOrder(node* head, int value, int sentinel)
                 p->prev = (*head)->prev;
                 *head = p;
                 (*head)->next->prev = p;
-                popEnd(head);
                 return;
             }
             else
@@ -242,7 +224,6 @@ void addElementInOrder(node* head, int value, int sentinel)
         p->next = *head;
         p->prev = (*head)->prev;
         *head = p;
-        popEnd(head);
     }
     else
     {
@@ -275,12 +256,10 @@ node findInOrder(node head, int value, int sentinel)
 {
     if (sentinel == 1)
     {
-        pushEnd(&head, 9999);
         while ((head->data != 9999) && (head->data != value))
         {
             head = head->next;
         }
-        popEnd(&head);
     }
     else
     {
@@ -303,7 +282,6 @@ void removeElementInOrder(node* head, node element, int sentinel)
         }
         else
         {
-            pushEnd(head, 9999);
             node p = *head;
             while(p->next != element) 
             {
@@ -313,7 +291,6 @@ void removeElementInOrder(node* head, node element, int sentinel)
             p->next = NULL;
             p->next = element->next;
             p->next->prev = p;
-            popEnd(head);
         }
     }
     else
@@ -385,13 +362,6 @@ node readFromFileInOrder(char *fname, int sentinel)
                     }
                 }
             }
-            node *p = &head;
-            while((*p)->next)
-            {
-                p = &(*p)->next;
-            }
-            free(*p);
-            (*p)->prev->next = 0;
         }
         else
         {
