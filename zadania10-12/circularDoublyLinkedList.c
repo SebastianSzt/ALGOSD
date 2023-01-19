@@ -172,14 +172,14 @@ void printList(node head)
             if (p->next == head) break;
             p = p->next;
         }
-        p = p->next;
-        printf("\t");
-        while (p)
-        {
-            printf("%d->", p->data);
-            if (p->next == head) break;
-            p = p->next;
-        }
+        // p = p->next;
+        // printf("\t");
+        // while (p)
+        // {
+        //     printf("%d->", p->data);
+        //     if (p->next == head) break;
+        //     p = p->next;
+        // }
     }
     printf("\n");
 }
@@ -195,14 +195,14 @@ void printListReverse(node head)
             if (p->prev == head->prev) break;
             p = p->prev;
         }
-        p = p->prev;
-        printf("\t");
-        while (p)
-        {
-            printf("%d->", p->data);
-            if (p->prev == head->prev) break;
-            p = p->prev;
-        }
+        // p = p->prev;
+        // printf("\t");
+        // while (p)
+        // {
+        //     printf("%d->", p->data);
+        //     if (p->prev == head->prev) break;
+        //     p = p->prev;
+        // }
     }
     printf("\n");
 }
