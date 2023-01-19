@@ -55,9 +55,7 @@ node ancestor(node root)
         root = root->parent;
     } 
     while (root && root->right == tmp);
-
     return root;
-
 }
 
 int containSameValues(node* tree1, node* tree2)
