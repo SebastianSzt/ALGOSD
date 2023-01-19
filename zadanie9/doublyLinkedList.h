@@ -26,7 +26,7 @@ void printListReverse(node head); //wyświetl zawartość listy od tyłu
 // lista dwukierunkowa posortowana
 void addElementInOrder(node* head, int value, int sentinel); // dodaj element w kolejności
 node findInOrder(node head, int value, int sentinel); // znajdowanie elementu o wskazanej wartości
-void removeElementInOrder(node* head, node element, int sentinel); // usuwanie elementu wcześniej znalezionego
+void removeElementInOrder(node* head, node element); // usuwanie elementu wcześniej znalezionego
 node readFromFileInOrder(char *fname, int sentinel); // wczytanie listy do pliku (w porządku, ale w pliku nie musi być zachowany porządek)
 
 // UWAGA! W driverze należy dać użytkownikowi możlwość wyboru, czy chce działać na liście posortowanej czy też nie

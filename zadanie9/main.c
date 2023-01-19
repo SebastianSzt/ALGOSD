@@ -223,7 +223,7 @@ int main()
                 {
                     printf("Lista wskazanego elementu:\n");
                     printList(element_removeElementInOrder);
-                    removeElementInOrder(&head, element_removeElementInOrder, sentinel);
+                    removeElementInOrder(&head, element_removeElementInOrder);
                     printf("Lista po usunięciu wskazanego elementu:\n");
                     printList(head);
                 }

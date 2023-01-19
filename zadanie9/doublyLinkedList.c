@@ -268,48 +268,29 @@ node findInOrder(node head, int value, int sentinel)
             head = head->next;
         }
     }
-    if (head) head->prev = 0;
     return head;
 }
 
-void removeElementInOrder(node* head, node element, int sentinel)
+void removeElementInOrder(node* head, node element)
 {
-    if (sentinel == 1)
+    if (element != 0)
     {
-        if (*head == element)
+        if (element->prev)
         {
-            pop(head);
+            if (element->next)
+            {
+                element->next->prev = element->prev;
+                element->prev->next = element->next;
+            }
+            else
+            {
+                element->prev->next = 0;
+            }
         }
         else
         {
-            node p = *head;
-            while(p->next != element) 
-            {
-                p = p->next;
-            }
-            free(p->next);
-            p->next = NULL;
-            p->next = element->next;
-            p->next->prev = p;
-        }
-    }
-    else
-    {
-        if (*head == element)
-        {
-            pop(head);
-        }
-        else
-        {
-            node p = *head;
-            while(p->next != element) 
-            {
-                p = p->next;
-            }
-            free(p->next);
-            p->next = NULL;
-            p->next = element->next;
-            if (p->next) p->next->prev = p;
+            *head = (*head)->next;
+            (*head)->prev = 0;
         }
     }
 }
