@@ -55,91 +55,33 @@ void removeNode(node* root, char* value)
         printf("Nie znaleziono takiego wyrazu, nic nie usunieto.\n");
         return;
     }
-    
-    if (!tmp->left && !tmp->right)
+
+    node current;
+    if (tmp->right)
+    {
+        current = tmp->right;
+        while (current->left)
+        {
+            current = current->left;
+        }
+        tmp->word = current->word;
+        removeNode(&current, current->word);
+    }
+    else if (tmp->left)
+    {
+        current = tmp->left;
+        while (current->right)
+        {
+            current = current->right;
+        }
+        tmp->word = current->word;
+        removeNode(&current, current->word);
+    }
+    else
     {
         if (tmp->parent->left == tmp) tmp->parent->left = NULL;
         else tmp->parent->right = NULL;
         free(tmp);
-    }
-    else if (tmp->left && !tmp->right)
-    {
-        if (tmp->parent->left == tmp)
-        {
-            tmp->parent->left = tmp->left;
-            tmp->parent->left->parent = tmp->parent;
-        }
-        else
-        {
-            tmp->parent->right = tmp->left;
-            tmp->parent->right->parent = tmp->parent;
-        }
-        free(tmp);
-    }
-    else if (!tmp->left && tmp->right)
-    {
-        if (tmp->parent->left == tmp)
-        {
-            tmp->parent->left = tmp->right;
-            tmp->parent->left->parent = tmp->parent;
-        }
-        else
-        {
-            tmp->parent->right = tmp->right;
-            tmp->parent->right->parent = tmp->parent;
-        }
-        free(tmp);
-    }
-    else
-    {
-        node tmp2 = tmp->left;
-        if (tmp == *root)
-        {
-            *root = tmp->right;
-            (*root)->parent = NULL;
-            if (!(*root)->left) (*root)->left = tmp2;
-            else
-            {
-                node current = *root;
-                while (current->left)
-                {
-                    current = current->left;
-                }
-                tmp2->parent = current;
-                current->left = tmp2;
-            }
-            free(tmp);
-        }
-        else
-        {
-            if (tmp->parent->left == tmp)
-            {
-                tmp->parent->left = tmp->right;
-                tmp->parent->left->parent = tmp->parent;
-
-                node current = tmp->parent->left;
-                while (current->left)
-                {
-                    current = current->left;
-                }
-                tmp2->parent = current;
-                current->left = tmp2;
-            }
-            else
-            {
-                tmp->parent->right = tmp->right;
-                tmp->parent->right->parent = tmp->parent;
-
-                node current = tmp->parent->right;
-                while (current->left)
-                {
-                    current = current->left;
-                }
-                tmp2->parent = current;
-                current->left = tmp2;
-            }
-            free(tmp);
-        }
     }
 }
 
