@@ -239,11 +239,11 @@ int main()
         }
         if (sentinel == 1)
         {
-            while((*head).next)
+            while(head && (*head).next)
             {
                 head = (*head).next;
             }
-            (*head).prev->next = 0;
+            if ((*head).prev) (*head).prev->next = 0;
             free(head);
             head = NULL;
         }

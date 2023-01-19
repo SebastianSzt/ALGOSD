@@ -102,24 +102,23 @@ void removeNode(node* head, node current)
 {
     if (current != 0)
     {
-        node p = *head;
-        while (p && p->next != *head && p != current)
+        if (current->next && current->next != *head && current->prev != (*head)->prev)
         {
-            p = p->next;
+            current->next->prev = current->prev;
+            current->prev->next = current->next;
         }
-        if (p == current && p->next == *head && p != *head)
+        else if (current->prev == (*head)->prev && current->next != *head)
         {
-            popEnd(&p->next);
+            pop(&current);
         }
-        else if (p == current && p->next == *head && p == *head)
+        else if (current->prev == (*head)->prev && current->next == *head)
         {
             *head = NULL;
         }
-        else if (p == current && p->next != *head)
+        else
         {
-            pop(&p);
+            popEnd(head);
         }
-        else printf("Nie znaleziono wskazywanego elementu w liście.\n");
     }
 }
 
@@ -173,14 +172,14 @@ void printList(node head)
             if (p->next == head) break;
             p = p->next;
         }
-        // p = p->next;
-        // printf("\t");
-        // while (p)
-        // {
-        //     printf("%d->", p->data);
-        //     if (p->next == head) break;
-        //     p = p->next;
-        // }
+        p = p->next;
+        printf("\t");
+        while (p)
+        {
+            printf("%d->", p->data);
+            if (p->next == head) break;
+            p = p->next;
+        }
     }
     printf("\n");
 }
@@ -196,14 +195,14 @@ void printListReverse(node head)
             if (p->prev == head->prev) break;
             p = p->prev;
         }
-        // p = p->prev;
-        // printf("\t");
-        // while (p)
-        // {
-        //     printf("%d->", p->data);
-        //     if (p->prev == head->prev) break;
-        //     p = p->prev;
-        // }
+        p = p->prev;
+        printf("\t");
+        while (p)
+        {
+            printf("%d->", p->data);
+            if (p->prev == head->prev) break;
+            p = p->prev;
+        }
     }
     printf("\n");
 }

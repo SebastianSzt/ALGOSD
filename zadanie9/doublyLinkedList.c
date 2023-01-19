@@ -40,11 +40,16 @@ int pop(node* head)
 {
     if(*head)
     {
-        node p = *head;
-        int x = p->data;
-        *head = p->next;
-        free(p);
-        (*head)->prev = 0;
+        int x = (*head)->data;
+        if ((*head)->next) 
+        {
+            *head = (*head)->next;
+            (*head)->prev = 0;
+        }
+        else
+        {
+            *head = NULL;
+        }  
         return x;
     }
     else return 9999;
@@ -127,8 +132,15 @@ void removeNode(node* head, node current)
         }
         else
         {
-            *head = (*head)->next;
-            (*head)->prev = 0;
+            if (current->next)
+            {
+                *head = (*head)->next;
+                (*head)->prev = 0;
+            }
+            else
+            {
+                *head = NULL;
+            }
         }
     }
 }
@@ -188,13 +200,16 @@ void printList(node head)
 
 void printListReverse(node head)
 {
-    while (head->next && head->next->data != 9999)
+    while (head && head->next && head->next->data != 9999)
     {
         head = head->next;
     }
     while (head)
     {
-        printf ("%d->", head->data);
+        if(head->data != 9999)
+        {
+            printf ("%d->", head->data);
+        }
         head = head->prev;
     }
     printf ("\n");
@@ -289,8 +304,15 @@ void removeElementInOrder(node* head, node element)
         }
         else
         {
-            *head = (*head)->next;
-            (*head)->prev = 0;
+            if (element->next)
+            {
+                *head = (*head)->next;
+                (*head)->prev = 0;
+            }
+            else
+            {
+                pop(head);
+            }
         }
     }
 }

@@ -100,24 +100,14 @@ void removeNode(node* head, node current)
 {
     if (current != 0)
     {
-        node p = *head;
-        while (p && p->next != *head && p != current)
+        if (current->next && current->next != *head)
         {
-            p = p->next;
+            *current = *current->next;
         }
-        if (p == current && p->next == *head && p != *head)
+        else
         {
-            popEnd(&p->next);
+            popEnd(head);
         }
-        else if (p == current && p->next == *head && p == *head)
-        {
-            *head = NULL;
-        }
-        else if (p == current && p->next != *head)
-        {
-            pop(&p);
-        }
-        else printf("Nie znaleziono wskazywanego elementu w liście.\n");
     }
 }
 
