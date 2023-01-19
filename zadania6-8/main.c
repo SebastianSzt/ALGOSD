@@ -32,6 +32,12 @@ int main()
             printf("Wybierz opcję: ");
             scanf("%d", &sentinel);
         }
+        /*if (sentinel == 1) //Odkomentować jeśli lista nie jest wczytywana z pliku
+        {
+            head = (node)malloc(sizeof(linkedListNode));
+            head->data = 9999;
+            (*head).next = 0;
+        }*/
     }
 
     int value = 9999;
