@@ -132,21 +132,16 @@ node find(node head, int value, int sentinel)
 
 void removeElement(node* head, node element)
 {
-    node p = *head;
-    if (*head == element)
+    if (element)
     {
-        *head = p->next;
-        free(p);
-    }
-    else
-    {
-        while(p->next != element) 
+        if (element->next)
         {
-            p = p->next;
+            *element = *element->next;
         }
-        free(p->next);
-        p->next = NULL;
-        p->next = element->next;
+        else
+        {
+            popBack(head, 0);
+        }
     }
 }
 
