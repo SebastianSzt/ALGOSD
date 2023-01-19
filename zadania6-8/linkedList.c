@@ -2,36 +2,10 @@
 #include <stdlib.h>
 #include "linkedList.h"
 
-void pushEnd(node *head, int val) //funkcja dla wartownika
-{
-    node p = (node)malloc(sizeof(linkedListNode));
-    p->data = val;
-    p->next = 0;
-    while (*head)
-    {
-        head = &(*head)->next;
-    }
-    *head = p;
-}
-
-void popEnd(node *head) //funkcja dla wartownika
-{
-    if(*head)
-    {
-        while((*head)->next)
-        {
-            head = &(*head)->next;
-        }
-        free(*head);
-        *head = NULL;
-    }
-}
-
 void addElement(node* head, int value, int sentinel)
 {
     if (sentinel == 1)
     {
-        pushEnd(head, 9999);
         node p = (node)malloc(sizeof(linkedListNode));
         p->data = value;
         while((*head)->data != 9999)
@@ -40,7 +14,6 @@ void addElement(node* head, int value, int sentinel)
             {
                 p->next = *head;
                 *head = p;
-                popEnd(head);
                 return;
             }
             else
@@ -50,7 +23,6 @@ void addElement(node* head, int value, int sentinel)
         }
         p->next = *head;
         *head = p;
-        popEnd(head);
     }
     else
     {
@@ -79,20 +51,16 @@ int pop(node* head, int sentinel)
     node p = *head;
     if (sentinel == 1)
     {
-        pushEnd(head, 9999);
         if((*head)->data != 9999)
         {
             int x = (*head)->data;
             *head = p->next;
             free(p);
-            popEnd(head);
             return x;
         }
         else
         {
             int x = (*head)->data;
-            free(*head);
-            *head = NULL;
             return x;
         }
     }
@@ -115,14 +83,12 @@ int popBack(node* head, int sentinel)
     {
         if (*head)
         {
-            pushEnd(head, 9999);
             while((*head)->next->data != 9999)
             {
                 head = &(*head)->next;
             }
             int x = (*head)->data;
-            free(*head);
-            *head = NULL;
+            *head = (*head)->next;
             return x;
         }
         else return 9999;
@@ -148,12 +114,10 @@ node find(node head, int value, int sentinel)
 {
     if (sentinel == 1)
     {
-        pushEnd(&head, 9999);
         while ((head->data != 9999) && (head->data != value))
         {
             head = head->next;
         }
-        popEnd(&head);
         return head;
     }
     else
@@ -166,52 +130,29 @@ node find(node head, int value, int sentinel)
     }
 }
 
-void removeElement(node* head, node element, int sentinel)
+void removeElement(node* head, node element)
 {
-    if (sentinel == 1)
+    node p = *head;
+    if (*head == element)
     {
-        if (*head == element)
-        {
-            pop(head, sentinel);
-        }
-        else
-        {
-            pushEnd(head, 9999);
-            node p = *head;
-            while(p->next != element) 
-            {
-                p = p->next;
-            }
-            free(p->next);
-            p->next = NULL;
-            p->next = element->next;
-            popEnd(head);
-        }
+        *head = p->next;
+        free(p);
     }
     else
     {
-        node p = *head;
-        if (*head == element)
+        while(p->next != element) 
         {
-            *head = p->next;
-            free(p);
+            p = p->next;
         }
-        else
-        {
-            while(p->next != element) 
-            {
-                p = p->next;
-            }
-            free(p->next);
-            p->next = NULL;
-            p->next = element->next;
-        }
+        free(p->next);
+        p->next = NULL;
+        p->next = element->next;
     }
 }
 
 void printList(node head)
 {
-    while (head)
+    while (head && head->data != 9999)
     {
         printf ("%d->", head->data);
         head = head->next;
@@ -219,21 +160,55 @@ void printList(node head)
     printf ("\n");
 }
 
-node readFromFile(char *fname)
+node readFromFile(char *fname, int sentinel)
 {
     FILE *file = fopen(fname, "r");
     node head = NULL;
+    if (sentinel == 1)
+    {
+        head = (node)malloc(sizeof(linkedListNode));
+        head->data = 9999;
+        (*head).next = 0;
+    }
     if (file == NULL)
     {
         printf("Odczyt pliku nie powiódł się.\n");
+        fclose(file);
     }
     else
     {
         int val;
-        while(fscanf(file, "%d ",&val) > 0)
+        if (sentinel == 1)
         {
-            pushEnd(&head, val);
+            while(fscanf(file, "%d ",&val) > 0)
+            {
+                node *tmp = &head;
+                while ((*tmp)->data != 9999)
+                {
+                    tmp = &(*tmp)->next;
+                }
+                node p = (node)malloc(sizeof(linkedListNode));
+                p->data = val;
+                p->next = *tmp;
+                *tmp = p;
+            }
         }
+        else
+        {
+            while(fscanf(file, "%d ",&val) > 0)
+            {
+                node *tmp = &head;
+                while (*tmp)
+                {
+                    tmp = &(*tmp)->next;
+                }
+                node p = (node)malloc(sizeof(linkedListNode));
+                p->data = val;
+                p->next = 0;
+                *tmp = p;
+            }
+        }
+        
     }
     fclose(file);
     return head;
@@ -244,7 +219,6 @@ int saveToFile(node head, char *fname)
     FILE *file = fopen(fname, "w");
     if (file == NULL)
     {
-        printf("Error.\n");
         fclose(file);
         return 0;
     }
@@ -252,6 +226,7 @@ int saveToFile(node head, char *fname)
     {
         for (node curr = head; curr != NULL; curr = curr->next)
         {
+            if (curr->data == 9999) break;
             fprintf(file, "%d ", curr->data);
         }
         fclose(file);

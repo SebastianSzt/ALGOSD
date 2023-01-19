@@ -6,16 +6,13 @@ typedef struct listNode
 
 typedef linkedListNode* node; // tym razem ukrywamy jeden wskaźnik w definicji linkedListNode;
 
-void pushEnd(node *head, int val); //dodanie wartownika na koniec
-void popEnd(node *head); //usuniecie wartownika
-
 void addElement(node* head, int value, int sentinel); // dodaj element w kolejności
 int pop(node* head, int sentinel); // usuwanie pierwszego elementu listy i zwracanie jego wartości
 int popBack(node* head, int sentinel); // usuwanie ostatniego elementu listy i zwracanie jego wartości
 node find(node head, int value, int sentinel); // znajdowanie elementu o wskazanej wartości
-void removeElement(node* head, node element, int sentinel); // usuwanie elementu wcześniej znalezionego
+void removeElement(node* head, node element); // usuwanie elementu wcześniej znalezionego
 void printList(node head); // wyświetlanie listy
-node readFromFile(char *fname); // wczytaj zawartość listy z pliku
+node readFromFile(char *fname, int sentinel); // wczytaj zawartość listy z pliku
 int saveToFile(node head, char *fname); // zapisz zawartość listy do pliku
 
 // UWAGA! Należy dać użytkownikowi możliwość wyboru, czy lista jest z wartownikiem, czy nie, można to zrobić albo przekazując do funkcji dodatkowy parametr (np. int sentinel) lub parametr trzymając jako zmienną w bibliotece

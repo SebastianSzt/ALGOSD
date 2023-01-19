@@ -24,7 +24,7 @@ int main()
     int sentinel = 2;
     if (select > 0 && select < 6)
     {
-        while(sentinel != 0 && sentinel != 1)
+        while (sentinel != 0 && sentinel != 1)
         {
             printf("Czy lista jest z wartownikiem?\n");
             printf("0 - Nie\n");
@@ -41,7 +41,7 @@ int main()
             exit(0);
             break;
         case 1:
-            head = readFromFile("plik.txt");
+            head = readFromFile("plik.txt", sentinel);
             printf("Lista przed:\n");
             printList(head);
             addElement(&head, 7, sentinel);
@@ -49,7 +49,7 @@ int main()
             printList(head);
             break;
         case 2:
-            head = readFromFile("plik.txt");
+            head = readFromFile("plik.txt", sentinel);
             printf("Lista przed:\n");
             printList(head);
             value = pop(&head, sentinel);
@@ -59,7 +59,7 @@ int main()
             else printf("Wartość usuniętego elementu: %d\n", value);
             break;
         case 3:
-            head = readFromFile("plik.txt");
+            head = readFromFile("plik.txt", sentinel);
             printf("Lista przed:\n");
             printList(head);
             value = popBack(&head, sentinel);
@@ -69,11 +69,11 @@ int main()
             else printf("Wartość usuniętego elementu: %d\n", value);
             break;
         case 4:
-            head = readFromFile("plik.txt");
+            head = readFromFile("plik.txt", sentinel);
             printf("Przeszukiwana lista:\n");
             printList(head);
             node current = find(head, 4, sentinel);
-            if (!current) printf("Nie znaleziono elementu w liście.\n");
+            if (!current || current->data == 9999) printf("Nie znaleziono elementu w liście.\n");
             else 
             {
                 printf("Lista znalezionego elementu:\n");
@@ -81,32 +81,32 @@ int main()
             }
             break;
         case 5:
-            head = readFromFile("plik.txt");
+            head = readFromFile("plik.txt", sentinel);
             printf("Lista:\n");
             printList(head);
             node element = find(head, 4, sentinel);
-            if (!element) printf("Nie znaleziono elementu w liście.\n");
+            if (!element || element->data == 9999) printf("Nie znaleziono elementu w liście.\n");
             else 
             {
                 printf("Lista znalezionego elementu:\n");
                 printList(element);
-                removeElement(&head, element, sentinel);
+                removeElement(&head, element);
                 printf("Lista po usunięciu znalezionego elementu:\n");
                 printList(head);
             }
             break;
         case 6:
-            head = readFromFile("plik.txt");
+            head = readFromFile("plik.txt", sentinel);
             printf("Wyswietlanie listy:\n");
             printList(head);
             break;
         case 7:
-            head = readFromFile("plik.txt");
+            head = readFromFile("plik.txt", sentinel);
             printf("Lista po wczytaniu z pliku:\n");
             printList(head);
             break;
         case 8:
-            head = readFromFile("plik.txt");
+            head = readFromFile("plik.txt", sentinel);
             printf("Lista do zapisania:\n");
             printList(head);
             int test = saveToFile(head, "plik.txt");
@@ -116,5 +116,14 @@ int main()
         default:
             printf("Niepoprawna cyfra.\n");
             break;
+    }
+    if (sentinel == 1)
+    {
+        while((*head).next)
+        {
+            head = (*head).next;
+        }
+        free(head);
+        head = NULL;
     }
 }
