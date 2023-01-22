@@ -30,7 +30,7 @@ Po sprawdzeniu zadanie otrzyma status sprawdzone - będzie to oznaczać, że w n
 19. Zadanie 19 - nierozpoczęte
 20. Zadanie 20 - nierozpoczęte
 21. Zadanie 21 - gotowe do oceny
-22. Zadanie 22 - nierozpoczęte
+22. Zadanie 22 - gotowe do oceny
 23. Zadanie 23 - nierozpoczęte
 24. Zadanie 24 - nierozpoczęte
 25. Zadanie 25 - nierozpoczęte
