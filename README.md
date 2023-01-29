@@ -33,7 +33,7 @@ Po sprawdzeniu zadanie otrzyma status sprawdzone - będzie to oznaczać, że w n
 22. Zadanie 22 - gotowe do oceny
 23. Zadanie 23 - nierozpoczęte
 24. Zadanie 24 - nierozpoczęte
-25. Zadanie 25 - nierozpoczęte
+25. Zadanie 25 - gotowe do oceny
 
 ## Budowanie zadań:
 Zadania od 1 do 5:
