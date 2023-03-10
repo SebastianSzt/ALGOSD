@@ -35,16 +35,19 @@ void pushEnd(node **head, int val)
 
 void pop(node **head)
 {
-    node *l = *head;
-    if(l->next != 0)
+    if (*head != NULL)
     {
-        *head = l->next;
-        free(l);
-    }
-    else
-    {
-        free(l);
-        *head = NULL;
+        node *l = *head;
+        if(l->next != 0)
+        {
+            *head = l->next;
+            free(l);
+        }
+        else
+        {
+            free(l);
+            *head = NULL;
+        }
     }
 }
 
@@ -202,6 +205,66 @@ void removeAll_recursively(node **head, int val)
         else if ((*head)->next)
         {
             removeAll_recursively(&(*head)->next, val);
+        }
+    }
+}
+
+int findMostCommon(node *head)
+{
+    int max_count = 0;
+    int max_value = 0;
+
+    while (head != NULL)
+    {
+        int count = 0;
+        node *current = head->next;
+
+        while (current != NULL) 
+        {
+            if (current->data == head->data) 
+            {
+                count++;
+            }
+            current = current->next;
+        }
+
+        if (count > max_count) 
+        {
+            max_count = count;
+            max_value = head->data;
+        }
+
+        head = head->next;
+    }
+
+    return max_value;
+}
+
+void usunniepodz(node **l, int k)
+{
+    node *current = *l;
+    node *prev = NULL;
+    while (current != NULL)
+    {
+        if (current->data % k != 0)
+        {
+            if (prev == NULL) 
+            {
+                *l = current->next;
+                free(current);
+                current = *l;
+            } 
+            else 
+            {
+                prev->next = current->next;
+                free(current);
+                current = prev->next;
+            }
+        }
+        else
+        {
+            prev = current;
+            current = current->next;
         }
     }
 }
