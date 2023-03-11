@@ -19,7 +19,8 @@ int main()
     printf("9 - wczytaj zawartość listy z pliku\n");
     printf("10 - zapisz zawartość listy do pliku\n");
     printf("11 - wyświetl zawartość listy\n");
-    printf("12 - usuń z listy a wszystkie wystąpienia elementów z listy b\n");
+    printf("12 - usuń co k-ty element aż na liście pozostanie tylko jeden element\n");
+    printf("13 - usuń z listy a wszystkie wystąpienia elementów z listy b\n");
     printf("Wybierz opcję: ");
     int select;
     scanf("%d", &select);
@@ -141,6 +142,15 @@ int main()
             printList(head);
             break;
         case 12:
+            head = readFromFile("plik.txt");
+            printf("Lista:\n");
+            printList(head);
+            int k = 3;
+            removeEveryK(&head, k);
+            printf("Lista po usuwaniu co %d element:\n", k);
+            printList(head);
+            break;
+        case 13:
             head = readFromFile("plik.txt");
             printf("Lista a:\n");
             printList(head);

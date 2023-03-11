@@ -173,6 +173,42 @@ void printList(node head)
     printf("\n");
 }
 
+void removeEveryK(node* head, int k)
+{
+    node current = *head;
+    node temp;
+
+    if (*head == NULL || current->next == *head || k < 1)
+    {
+        return;
+    }
+
+    if (k == 1)
+    {
+        while (current->next != *head)
+        {
+            pop(&current);
+        }
+        return;
+    }
+    int i;
+    while (current->next != *head || current->next->next != *head)
+    {
+        for (i = 0; i < k - 2; i++)
+        {
+            current = current->next;
+        }
+        temp = current->next;
+        current->next = temp->next;
+        if (temp == *head)
+        {
+            *head = current->next;
+        }
+        free(temp);
+        current = current->next;
+    }
+}
+
 void diffList(node* a, node b)
 {
     if (b)
