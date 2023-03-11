@@ -5,7 +5,9 @@
 int main()
 {
     node head = NULL;
-    
+    node p = NULL;
+    node q = NULL;
+
     printf("Menu programu do list. Wybierz odpowiednią opcję.\n");
     printf("0 - Wyjscie z programu\n");
     printf("1 - dodaj element w kolejności\n");
@@ -16,13 +18,15 @@ int main()
     printf("6 - wyświetlanie listy\n");
     printf("7 - wczytaj zawartość listy z pliku\n");
     printf("8 - zapisz zawartość listy do pliku\n");
+    printf("9 - złączenie dwóch list uporządkowanych w jedną listę uporządkowaną\n");
+    printf("10 - porównanie dwóch list\n");
     printf("Wybierz opcję: ");
 
     int select;
     scanf("%d", &select);
 
     int sentinel = 2;
-    if (select > 0 && select < 6)
+    if (select > 0 && select < 11)
     {
         while (sentinel != 0 && sentinel != 1)
         {
@@ -119,11 +123,61 @@ int main()
             if (test == 1) printf("Zapis do pliku powiodl sie.\n");
             else if (test == 0) printf("Zapis do pliku nie powiodl sie.\n");
             break;
+        case 9:
+            p = readFromFile("plik1.txt", sentinel);
+            printf("Lista p:\n");
+            printList(p);
+            q = readFromFile("plik2.txt", sentinel);
+            printf("Lista q:\n");
+            printList(q);
+            node mergedList = merge(p, q);
+            printf("Zlaczone listy:\n");
+            printList(mergedList);
+            if (sentinel == 1)
+            {
+                while((*mergedList).next)
+                {
+                    mergedList = (*mergedList).next;
+                }
+                free(mergedList);
+                mergedList = NULL;
+            }
+            break;
+        case 10:
+            p = readFromFile("plik1.txt", sentinel);
+            printf("Lista p:\n");
+            printList(p);
+            q = readFromFile("plik2.txt", sentinel);
+            printf("Lista q:\n");
+            printList(q);
+            node uniqP = NULL;
+            node uniqQ = NULL;
+            compare(p, q, &uniqP, &uniqQ);
+            printf("Elemeny unikalne dla listy p:\n");
+            printList(uniqP);
+            printf("Elemeny unikalne dla listy q:\n");
+            printList(uniqQ);
+            if (sentinel == 1)
+            {
+                while((*p).next)
+                {
+                    p = (*p).next;
+                }
+                free(p);
+                p = NULL;
+                while((*q).next)
+                {
+                    q = (*q).next;
+                }
+                free(q);
+                q = NULL;
+            }
+            break;
         default:
             printf("Niepoprawna cyfra.\n");
             break;
     }
-    if (sentinel == 1)
+    if (sentinel == 1 && select != 9 && select != 10)
     {
         while((*head).next)
         {

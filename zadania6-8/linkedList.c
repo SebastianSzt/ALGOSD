@@ -228,3 +228,141 @@ int saveToFile(node head, char *fname)
         return 1;
     }
 }
+
+node merge(node p, node q)
+{
+    node mergedList = (node)malloc(sizeof(linkedListNode));
+    node current = mergedList;
+
+    while (p != NULL && p->data != 9999 && q != NULL && q->data != 9999) 
+    {
+        if (p->data <= q->data) 
+        {
+            current->next = p;
+            p = p->next;
+        } 
+        else 
+        {
+            current->next = q;
+            q = q->next;
+        }
+        current = current->next;
+    }
+
+    if (q == NULL || q->data == 9999) 
+    {
+        current->next = p;
+    } 
+    else 
+    {
+        current->next = q;
+    }
+
+    return mergedList->next;
+}
+
+void compare(node p, node q, node* uniqP, node* uniqQ)
+{
+    node pCurrent = p;
+    node qCurrent = q;
+    node *uniqPCurrent = uniqP;
+    node *uniqQCurrent = uniqQ;
+    node uniqPFirst = NULL;
+    node uniqQFirst = NULL;
+
+    while (pCurrent != NULL && pCurrent->data != 9999 && qCurrent != NULL && qCurrent->data != 9999) 
+    {
+        if (pCurrent->data < qCurrent->data) 
+        {
+            if (*uniqPCurrent == NULL)
+            {
+                node tmp = (node) malloc(sizeof(linkedListNode));
+                tmp->data = pCurrent->data;
+                tmp->next = NULL;
+                *uniqPCurrent = tmp;
+                uniqPFirst = *uniqPCurrent;
+            }
+            else if ((*uniqPCurrent)->data != pCurrent->data) 
+            {
+                node tmp = (node) malloc(sizeof(linkedListNode));
+                tmp->data = pCurrent->data;
+                tmp->next = NULL;
+                (*uniqPCurrent)->next = tmp;
+                *uniqPCurrent = (*uniqPCurrent)->next;
+            }
+            pCurrent = pCurrent->next;
+        } 
+        else if (qCurrent->data < pCurrent->data) 
+        {
+            if (*uniqQCurrent == NULL)
+            {
+                node tmp = (node) malloc(sizeof(linkedListNode));
+                tmp->data = qCurrent->data;
+                tmp->next = NULL;
+                *uniqQCurrent = tmp;
+                uniqQFirst = *uniqQCurrent;
+            }
+            else if ((*uniqQCurrent)->data != qCurrent->data) 
+            {
+                node tmp = (node) malloc(sizeof(linkedListNode));
+                tmp->data = qCurrent->data;
+                tmp->next = NULL;
+                (*uniqQCurrent)->next = tmp;
+                *uniqQCurrent = (*uniqQCurrent)->next;
+            }
+            qCurrent = qCurrent->next;
+        } 
+        else 
+        {
+            int tmpNumber = pCurrent->data;
+            while (pCurrent && pCurrent->data == tmpNumber)
+                pCurrent = pCurrent->next;
+            while (qCurrent && qCurrent->data == tmpNumber)
+                qCurrent = qCurrent->next;
+        }
+    }
+
+    while (pCurrent != NULL && pCurrent->data != 9999) 
+    {
+        if (*uniqPCurrent == NULL)
+        {
+            node tmp = (node) malloc(sizeof(linkedListNode));
+            tmp->data = pCurrent->data;
+            tmp->next = NULL;
+            *uniqPCurrent = tmp;
+            uniqPFirst = *uniqPCurrent;
+        }
+        else if ((*uniqPCurrent)->data != pCurrent->data) 
+        {
+            node tmp = (node) malloc(sizeof(linkedListNode));
+            tmp->data = pCurrent->data;
+            tmp->next = NULL;
+            (*uniqPCurrent)->next = tmp;
+            *uniqPCurrent = (*uniqPCurrent)->next;
+        }
+        pCurrent = pCurrent->next;
+    }
+
+    while (qCurrent != NULL && qCurrent->data != 9999) 
+    {
+        if (*uniqQCurrent == NULL)
+        {
+            node tmp = (node) malloc(sizeof(linkedListNode));
+            tmp->data = qCurrent->data;
+            tmp->next = NULL;
+            *uniqQCurrent = tmp;
+            uniqQFirst = *uniqQCurrent;
+        }
+        else if ((*uniqQCurrent)->data != qCurrent->data) 
+        {
+            node tmp = (node) malloc(sizeof(linkedListNode));
+            tmp->data = qCurrent->data;
+            tmp->next = NULL;
+            (*uniqQCurrent)->next = tmp;
+            *uniqQCurrent = (*uniqQCurrent)->next;
+        }
+        qCurrent = qCurrent->next;
+    }
+    *uniqP = uniqPFirst;
+    *uniqQ = uniqQFirst;
+}
