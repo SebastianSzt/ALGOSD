@@ -11,6 +11,8 @@ void insert(node* root, char* value)
         node d = NULL;
         d = (node)malloc(sizeof(treeNode));
         d->word = value;
+        d->word = (char*)malloc(strlen(value) + 1);
+        strcpy(d->word, value);
         d->left = NULL;
         d->right = NULL;
         d->parent = NULL;
@@ -191,4 +193,51 @@ void printTree0(node root, int space)
 void printTree(node root)
 {
     printTree0(root, 0);
+}
+
+void printToFile(node root, FILE *file)
+{
+    if (root != NULL)
+    {
+        fprintf(file, "%s ", root->word);
+        printToFile(root->left, file);
+        printToFile(root->right, file);
+    }
+}
+
+void saveToFile(node root)
+{
+    FILE *file = fopen("plik1.txt", "w");
+    if (file == NULL)
+    {
+        printf("Error.\n");
+    }
+    else
+    {
+        if (root != NULL)
+        {
+            fprintf(file, "%s ", root->word);
+            printToFile(root->left, file);
+            printToFile(root->right, file);
+        }
+        fclose(file);
+    }
+}
+
+void readFromFile(node* root, char* filename)
+{
+    FILE *file = fopen(filename, "r");
+    if (file == NULL)
+    {
+        printf("Error.\n");
+    }
+    else
+    {
+        char word[100];
+        while(fscanf(file, "%s ", word) > 0)
+        {
+            insert(root, word);
+        }
+        fclose(file);
+    }
 }
